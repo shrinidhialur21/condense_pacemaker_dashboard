@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
  
 # Install dependencies
-RUN npm ci
+RUN npm i
  
 # Copy all project files (use a .dockerignore to exclude unnecessary files)
 COPY . .
