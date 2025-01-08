@@ -29,7 +29,7 @@ COPY --from=build /app/dist ./dist
 RUN npm install -g serve
  
 # Expose port 4173 (default Vite preview port)
-EXPOSE 4173
+EXPOSE 8080
  
 # Serve the app
 CMD ["serve", "-s", "dist", "-l", "4173"]
