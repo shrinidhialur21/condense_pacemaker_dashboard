@@ -1,35 +1,32 @@
-# Build stage
+# # Use the official Node.js image for the build stage
 FROM node:18-alpine as build
- 
-# Set working directory
+
+# Set the working directory
 WORKDIR /app
- 
+
 # Copy package files (ensure these files exist in the build context)
 COPY package.json package-lock.json ./
- 
+
 # Install dependencies
-RUN npm i
- 
-# Copy all project files (use a .dockerignore to exclude unnecessary files)
+RUN npm ci
+
+# Copy the rest of the application files
 COPY . .
- 
-# Build the app
+
+# Build the application for production
 RUN npm run build
- 
-# Serve stage
-FROM node:18-alpine
- 
-# Set working directory
-WORKDIR /app
- 
-# Copy only the built files from the build stage
-COPY --from=build /app/dist ./dist
- 
-# Install serve globally
-RUN npm install -g serve
- 
-# Expose port 4173 (default Vite preview port)
-EXPOSE 8080
- 
-# Serve the app
-CMD ["npm", "run", "dev"]
+
+# Use a lightweight image for the production stage
+FROM nginx:alpine as production
+
+# Set working directory in the container
+WORKDIR /usr/share/nginx/html
+
+# Copy the built application files from the build stage
+COPY --from=build /app/dist .
+
+# Expose port 80
+EXPOSE 80
+
+# Default command to serve the app with Nginx
+CMD ["nginx", "-g", "daemon off;"]
