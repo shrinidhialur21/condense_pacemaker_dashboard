@@ -32,4 +32,4 @@ RUN npm install -g serve
 EXPOSE 8080
  
 # Serve the app
-CMD ["serve", "-s", "dist", "-l", "4173"]
+CMD ["npm", "run", "dev"]
