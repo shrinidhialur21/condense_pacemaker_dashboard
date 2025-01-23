@@ -100,6 +100,11 @@ function App() {
               {data ? (
                 <>
                  {/* Typography needed here */}
+                 <Typography> Device ID: {data.deviceId}</Typography>
+                 <Typography> Heart Rate: {data.heartRate} bpm </Typography>
+                 <Typography> Battery Status: {data.batteryStatus} % </Typography>
+                 <Typography> Pacing Mode: {data.pacingMode} </Typography>
+                 <Typography> Pacing Rate: {data.pacingRate} bpm </Typography>
                   <Typography>
                     Location: {data.geoLocation.latitude},{" "}
                     {data.geoLocation.longitude}
@@ -134,6 +139,17 @@ function App() {
             </Alert>
           )}
           {/* low heart rate display here */}
+
+          {lowHeartRateAlert && (
+            <Alert 
+            onClose={handleCloseAlert}
+            severity="warning"
+            variant="filled">
+              Low Heart Rate Detected!
+
+            </Alert>
+          )
+          }
         </Grid>
       </Grid>
     </div>
