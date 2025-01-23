@@ -99,11 +99,7 @@ function App() {
               <Typography variant="h6">Real-Time Data</Typography>
               {data ? (
                 <>
-                  <Typography>Device ID: {data.deviceId}</Typography>
-                  <Typography>Heart Rate: {data.heartRate} bpm</Typography>
-                  <Typography>Battery Status: {data.batteryStatus}%</Typography>
-                  <Typography>Pacing Mode: {data.pacingMode}</Typography>
-                  <Typography>Pacing Rate: {data.pacingRate} bpm</Typography>
+                 {/* Typography needed here */}
                   <Typography>
                     Location: {data.geoLocation.latitude},{" "}
                     {data.geoLocation.longitude}
@@ -137,15 +133,7 @@ function App() {
               High Heart Rate Detected!
             </Alert>
           )}
-          {lowHeartRateAlert && (
-            <Alert
-              onClose={handleCloseAlert}
-              severity="warning"
-              variant="filled"
-            >
-              Low Heart Rate Detected!
-            </Alert>
-          )}
+          {/* low heart rate display here */}
         </Grid>
       </Grid>
     </div>
